@@ -79,6 +79,23 @@ def check_network():
     os.system("ping -c 3 8.8.8.8")
     input(Fore.YELLOW + "\n press enter to return...")
 
+# НОВАЯ ФУНКЦИЯ: процессы
+def show_processes():
+    os.system('clear')
+    print(current_color + "\n top processes (by memory)\n")
+    # Выводим заголовок и топ-5 процессов по памяти
+    os.system("ps aux --sort=-%mem | head -n 6")
+    input(Fore.YELLOW + "\n press enter to return...")
+
+# НОВАЯ ФУНКЦИЯ: сканер локалки
+def scan_local():
+    os.system('clear')
+    print(current_color + "\n local network check\n")
+    print(" pinging router (192.168.1.1)...")
+    # Пингуем роутер (вдруг ты не дома, то выдаст ошибку, но это нормально)
+    os.system("ping -c 2 192.168.1.1")
+    input(Fore.YELLOW + "\n press enter to return...")
+
 def show_settings():
     global current_color
     while True:
@@ -112,8 +129,10 @@ def main():
         print(" cyberdeck\n")
         print(" [1] monitor")
         print(" [2] network check")
-        print(" [3] settings")
-        print(" [4] exit\n")
+        print(" [3] processes")
+        print(" [4] scan local")
+        print(" [5] settings")
+        print(" [6] exit\n")
         
         choice = input(current_color + " select: " + Fore.RESET)
         
@@ -122,8 +141,12 @@ def main():
         elif choice == '2':
             check_network()
         elif choice == '3':
-            show_settings()
+            show_processes()
         elif choice == '4':
+            scan_local()
+        elif choice == '5':
+            show_settings()
+        elif choice == '6':
             break
 
 if __name__ == "__main__":
